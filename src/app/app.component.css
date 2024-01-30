@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.headersection{
+    background-color: rgb(59, 59, 177);
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px;
+    text-align: center;
+}
+.navlist ul li{
+    display: inline-block;
+    list-style-type: none;
+    padding-left: 10px;
+}
+.navlist ul li a{
+    color: black;
+    text-decoration: none;
+}
+#login ,#register ,#admin{
+    padding: 5px;
+    font-size: 15px;
+}
+.wlcm{
+    text-align: center;
+}

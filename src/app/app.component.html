@@ -1,0 +1,74 @@
+
+
+   <section class="headersection">
+        <header>
+            <nav>
+                <div class="navlist">
+                    <ul>
+                        <li><a href="">HOME</a></li>
+                        <li><a href="">ABOUT</a></li>
+                        <li><a href="">CONTACT US</a></li>
+                        <li><a href="">PORTFOLIO</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <!-- <button>Login</button>
+                    <button>Register</button>
+                    <button>admin</button> -->
+                </div>
+                
+            </nav>
+        </header>
+   </section>
+   <div class="wlcm">
+    <h2>WELCOME</h2>
+   </div>
+   <div *ngIf="!loggedIn && !isRegistering">
+    <h2>Login</h2>
+  
+    <form (ngSubmit)="login()">
+      <input type="text" name="username" [(ngModel)]="username" placeholder="Username">
+      <input type="password" name="password" [(ngModel)]="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+    <button (click)="showRegistrationForm()">Register</button>
+  </div>
+
+  <div *ngIf="!loggedIn && isRegistering">
+    <h2>Register</h2>
+    
+    <form (ngSubmit)="register()">
+    
+      <input type="text" name="newUsername" [(ngModel)]="newUsername" placeholder="New Username">
+      <input type="password" name="newPassword" [(ngModel)]="newPassword" placeholder="New Password">
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <div *ngIf="loggedIn && isAdmin">
+    <h2>Admin Dashboard</h2>
+    <div *ngFor="let user of users">
+      <div *ngIf="editingUser && editingUser.id === user.id">
+        <input type="text" [(ngModel)]="editingUser.name">
+        <input type="email" [(ngModel)]="editingUser.email">
+        <button (click)="saveUserChanges()">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </div>
+      <div *ngIf="!editingUser || editingUser.id !== user.id">
+        {{ user.name }} - {{ user.email }}
+        <button (click)="editUser(user)">Edit</button>
+        <button (click)="deleteUser(user.id)">Delete</button>
+      </div>
+    </div>
+    <button (click)="goBackToLogin()">Back to Login</button>
+  </div>
+
+  <div *ngIf="loggedIn && isUser">
+    <h2>Welcome, {{ username }}!</h2>
+  
+    <p>This is your user info page.</p>
+    <button (click)="logout()">Logout</button>
+  </div>
+
+
+<router-outlet></router-outlet>
